@@ -16,19 +16,30 @@ public class UdpClientRequest extends Thread {
     private List<User> users=new ArrayList<>();
     private Timeline updateUserTimer;
     private static UdpClientRequest instance;
+    private boolean started = false;
 
     public UdpClientRequest() throws SocketException {
         instance = this;
         updateUserTimer = new Timeline(updateUserKeyFrame);
         updateUserTimer.setCycleCount(Animation.INDEFINITE);
-        updateUserTimer.play();
     }
 
     public static UdpClientRequest getInstance() throws SocketException {
-        if (instance == null)
+        if (instance == null) {
             instance = new UdpClientRequest();
+        }
         return instance;
     }
+    
+    @Override
+    public synchronized void start() {
+        if (!started) {
+            started = true;
+            updateUserTimer.play();
+            super.start();
+        }
+    }
+    
     public synchronized String requestMethod(String str) throws Exception {
         byte[] bytes1 = str.getBytes();
         InetAddress address=InetAddress.getLocalHost();

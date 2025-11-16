@@ -27,8 +27,22 @@ public class Gui {
     private TcpClientRequest tcpClientRequest = TcpClientRequest.getInstance();
 
     public Gui() throws Exception {
+        if (stage == null) {
+            throw new Exception("Stage is null - application not properly initialized");
+        }
         String snakeCoordinate = tcpClientRequest.requestMethod("sendSnake/");
         snake = new Snake(Double.parseDouble(snakeCoordinate.split(",")[0]), Double.parseDouble(snakeCoordinate.split(",")[1]), 30);
+        
+        Scene scene = new Scene(pane);
+        scene.getRoot().setStyle("-fx-background-color: Black;");
+        scene.setFill(Color.RED);
+        
+        stage.setScene(scene);
+        stage.setX(0);
+        stage.setY(0);
+        stage.setWidth(1920);
+        stage.setHeight(1000);
+        
         Timeline snakeUpdate = new Timeline(snakeUpdateKeyFrame);
         snakeUpdate.setCycleCount(Animation.INDEFINITE);
         snakeUpdate.play();
@@ -38,13 +52,6 @@ public class Gui {
         Timeline bodyActivator = new Timeline(bodyActivatorKeyFrame);
         bodyActivator.setCycleCount(Animation.INDEFINITE);
         bodyActivator.play();
-        stage.setScene(new Scene(pane));
-        stage.getScene().getRoot().setStyle("-fx-background-color: Black;");
-        stage.getScene().setFill(Color.RED);
-        stage.setX(0);
-        stage.setY(0);
-        stage.setWidth(1920);
-        stage.setHeight(1000);
         stage.getScene().setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case RIGHT -> snake.setRight(true);
@@ -54,6 +61,8 @@ public class Gui {
                 case UP -> snake.setUp(true);
 
                 case DOWN -> snake.setDown(true);
+                
+                default -> {}
             }
         });
         stage.getScene().setOnKeyReleased(event -> {
@@ -65,6 +74,8 @@ public class Gui {
                 case UP -> snake.setUp(false);
 
                 case DOWN -> snake.setDown(false);
+                
+                default -> {}
             }
         });
     }

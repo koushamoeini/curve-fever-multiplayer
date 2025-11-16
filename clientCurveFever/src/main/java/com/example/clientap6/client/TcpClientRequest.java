@@ -1,10 +1,8 @@
 package com.example.clientap6.client;
 
 import java.io.*;
-import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class TcpClientRequest {
     private Socket socket=new Socket(InetAddress.getLocalHost(),1234);

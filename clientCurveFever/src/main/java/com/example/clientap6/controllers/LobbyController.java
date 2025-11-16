@@ -16,7 +16,6 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.SocketException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +68,19 @@ public class LobbyController implements Initializable {
                     Button button = new Button(udpClientRequest.requestMethod("getInvite/").split("/")[0] + " " + udpClientRequest.requestMethod("getInvite/").split("/")[1]);
                     button.setOnAction(e -> {
                         try {
+                            updateScrollPane.stop();
+                            inviteUpdate.stop();
                             udpClientRequest.requestMethod("startGame/" + currentUser.getUser().getName() + "/" + button.getText().split(" ")[0]);
                             tcpClientRequest.requestMethod("startGame/" + currentUser.getUser().getName());
-                            new Gui();
+                            javafx.application.Platform.runLater(() -> {
+                                try {
+                                    new Gui();
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+                            });
                         } catch (Exception ex) {
-                            throw new RuntimeException(ex);
+                            ex.printStackTrace();
                         }
 
                     });
@@ -88,11 +95,19 @@ public class LobbyController implements Initializable {
             }
             try {
                 if (udpClientRequest.requestMethod("acceptReq/" + currentUser.getUser().getName()).equals("true")) {
+                    updateScrollPane.stop();
+                    inviteUpdate.stop();
                     tcpClientRequest.requestMethod("startGame/" + currentUser.getUser().getName());
-                    new Gui();
+                    javafx.application.Platform.runLater(() -> {
+                        try {
+                            new Gui();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
                 }
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         });
         updateScrollPane = new Timeline(updateScrollPaneKeyFrame);

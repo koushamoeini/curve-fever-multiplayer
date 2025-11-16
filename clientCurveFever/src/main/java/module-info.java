@@ -1,6 +1,7 @@
 module com.example.clientap6 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
             
                             
     opens com.example.clientap6 to javafx.fxml;

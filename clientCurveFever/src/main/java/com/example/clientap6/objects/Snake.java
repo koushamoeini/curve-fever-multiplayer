@@ -1,13 +1,7 @@
 package com.example.clientap6.objects;
 
-import com.example.clientap6.client.TcpClientRequest;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
-import java.util.List;
 
 public class Snake {
     private boolean isRight = false;

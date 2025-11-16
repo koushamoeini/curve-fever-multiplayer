@@ -19,14 +19,24 @@ public class LoginController {
 
     @FXML
     protected void onConfirmButtonClick() throws Exception {
-        User user = new User(userField.getText());
-        UdpClientRequest udpClientRequest=new UdpClientRequest();
-        udpClientRequest.requestMethod("login/"+user.getName());
-        currentUser.setUser(user);
-        FXMLLoader fxmlLoader = new FXMLLoader(Curve.class.getResource("lobby.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
-        stage.setX(500);
-        stage.setY(100);
-        stage.setScene(scene);
+        try {
+            User user = new User(userField.getText());
+            UdpClientRequest udpClientRequest = UdpClientRequest.getInstance();
+            if (!udpClientRequest.isAlive()) {
+                udpClientRequest.start();
+            }
+            // Give thread time to start
+            Thread.sleep(100);
+            udpClientRequest.requestMethod("login/"+user.getName());
+            currentUser.setUser(user);
+            FXMLLoader fxmlLoader = new FXMLLoader(Curve.class.getResource("lobby.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+            stage.setX(500);
+            stage.setY(100);
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }

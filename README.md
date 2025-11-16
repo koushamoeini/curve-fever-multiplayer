@@ -178,16 +178,6 @@ Default network settings (change in source code if needed):
 - Clients connect to localhost by default (modify for LAN play)
 - Game window size is fixed (1920x1000)
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -195,17 +185,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Kousha Moeini**
+- Email: koushamoeini@gmail.com
 - GitHub: [@koushamoeini](https://github.com/koushamoeini)
 
-## 🙏 Acknowledgments
-
-- Inspired by the classic Curve Fever / Achtung, die Kurve! game
-- Built as part of an Advanced Programming course project
-
-## 📸 Screenshots
-
-*Add screenshots of your game here once available*
-
 ---
-
-**Enjoy playing Curve Fever Multiplayer! 🎮🐍**
